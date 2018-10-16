@@ -191,6 +191,8 @@ namespace FindX
 
             float constRate = 0.2f;
 
+            float sampleCount = 2;
+
             int delta = Math.Abs(leftTop.Y - rightTop.Y);
             if (delta >= constDeltaOffset)
             {
@@ -218,6 +220,7 @@ namespace FindX
             int left = Math.Max(leftTop.X, leftBottom.X);
             int right = Math.Min(rightTop.X, rightBottom.X);
 
+            //List<Point> samplePoints
 
 
             Color color = bitmap.GetPixel(center.X, center.Y);
@@ -226,6 +229,8 @@ namespace FindX
             Point toDown = center;
             Point toLeft = center;
             Point toRight = center;
+
+
 
             int sample = 0;
             int sameColor = 0;
@@ -236,6 +241,9 @@ namespace FindX
                 bool canLeft = toLeft.X > left;
                 bool canRight = toRight.X < right;
 
+
+
+
                 if (canUp)
                 {
                     toUp.Offset(0, -step);
@@ -244,6 +252,7 @@ namespace FindX
                         sample++;
                         if (IsSameColor(color, bitmap.GetPixel(toUp.X, toUp.Y)))
                         {
+                            //bitmap.SetPixel(toUp.X,toUp.Y)
                             sameColor++;
                         }
                     }
