@@ -18,3 +18,13 @@ C:\Users\Administrator\Desktop\FindX\FindX\FindX\obj\Debug\FindX.csproj.Generate
 C:\Users\Administrator\Desktop\FindX\FindX\FindX\obj\Debug\FindX.csproj.CoreCompileInputs.cache
 C:\Users\Administrator\Desktop\FindX\FindX\FindX\obj\Debug\FindX.exe
 C:\Users\Administrator\Desktop\FindX\FindX\FindX\obj\Debug\FindX.pdb
+C:\Users\Administrator\Desktop\Tools\FindX\FindX\FindX\bin\Debug\FindX.exe.config
+C:\Users\Administrator\Desktop\Tools\FindX\FindX\FindX\bin\Debug\FindX.exe
+C:\Users\Administrator\Desktop\Tools\FindX\FindX\FindX\bin\Debug\FindX.pdb
+C:\Users\Administrator\Desktop\Tools\FindX\FindX\FindX\obj\Debug\FindX.csprojAssemblyReference.cache
+C:\Users\Administrator\Desktop\Tools\FindX\FindX\FindX\obj\Debug\FindX.Properties.Resources.resources
+C:\Users\Administrator\Desktop\Tools\FindX\FindX\FindX\obj\Debug\FindX.csproj.GenerateResource.cache
+C:\Users\Administrator\Desktop\Tools\FindX\FindX\FindX\obj\Debug\FindX.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\Desktop\Tools\FindX\FindX\FindX\obj\Debug\FindX.exe
+C:\Users\Administrator\Desktop\Tools\FindX\FindX\FindX\obj\Debug\FindX.pdb
+C:\Users\Administrator\Desktop\Tools\FindX\FindX\FindX\obj\Debug\FindX.pickColor2Button.resources

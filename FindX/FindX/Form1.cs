@@ -10,14 +10,16 @@ using System.Windows.Forms;
 
 namespace FindX
 {
-    public partial class Form1 : Form
+    public partial class pickColor2Button : Form
     {
         bool[,] checkingSigns;
 
-        public Form1()
+        public pickColor2Button()
         {
             InitializeComponent();
         }
+
+
 
         List<Point> GetCenterPoints(int beginX, int beginY, int lenth, int range, Bitmap bitmap)
         {
@@ -46,11 +48,18 @@ namespace FindX
 
         bool IsSameColor(Color color1, Color color2)
         {
-            int range = 10;
-            int deltaR = Math.Abs((color1.R - color2.R));
-            int deltaG = Math.Abs(color1.G - color2.G);
-            int deltaB = Math.Abs(color1.B - color2.B);
-            return deltaR <= range && deltaG <= range && deltaB <= range;
+            return GetTheColourMetric(color1, color2) <= 20;
+        }
+
+
+        double GetTheColourMetric(Color color1, Color color2)
+        {
+            float avg = (color1.R + color2.R) / 2.0f;
+            float R = color1.R - color2.R;
+            float G = color1.G - color2.G;
+            float B = color1.B - color2.B;
+
+            return Math.Sqrt((2 + avg / 256) * (R * R) + 4 * (G * G) + (2 + (255 - avg) / 256) * (B * B));
         }
 
         void SetOriginImag(Image image)
@@ -135,7 +144,7 @@ namespace FindX
                     {
                         int totalLenth = 0;
                         totalLenth = CheckLine(checkingBitmap, i, j, resultBitmap);
-                        if (totalLenth > 10)
+                        if (totalLenth > 25)
                         {
                             List<Point> centerPoints = GetCenterPoints(i, j, totalLenth, 5, checkingBitmap);
                             foreach (Point centerPoint in centerPoints)
@@ -144,7 +153,7 @@ namespace FindX
                                 int topLenth = 0;
                                 int bottomLenth = 0;
                                 int crossTotalLenth = CheckReverseLine(checkingBitmap, centerPoint.X, centerPoint.Y, ref topLenth, ref bottomLenth, resultBitmap);
-                                if (crossTotalLenth > 10)
+                                if (crossTotalLenth > 25)
                                 {
 
                                     Point leftTop = new Point(i, j);
@@ -156,13 +165,13 @@ namespace FindX
                                     {
                                         DrawLine(resultBitmap, i, j, 1, 1, totalLenth, Color.Red);
                                         DrawLine(resultBitmap, rightTop.X, rightTop.Y, -1, +1, crossTotalLenth, Color.Red);
-                                        //Log("TotalLenth" + totalLenth);
-                                        //Log("TopLenth" + topLenth);
-                                        //Log("BottomLenth" + bottomLenth);
-                                        //Log("");
+                                        Log("TotalLenth" + totalLenth);
+                                        Log("TopLenth" + topLenth);
+                                        Log("BottomLenth" + bottomLenth);
+                                        Log("");
                                         //Wait(50);
                                     }
-                                    
+
                                 }
                             }
                         }
@@ -178,7 +187,7 @@ namespace FindX
         {
             int constDeltaOffset = 5;
 
-            int step = 2;
+            int step = 1;
 
             float constRate = 0.2f;
 
@@ -223,8 +232,8 @@ namespace FindX
             while (true)
             {
                 bool canUp = toUp.Y > top;
-                bool canDown = toDown.Y < bottom ;
-                bool canLeft = toLeft.X > left ;
+                bool canDown = toDown.Y < bottom;
+                bool canLeft = toLeft.X > left;
                 bool canRight = toRight.X < right;
 
                 if (canUp)
@@ -238,7 +247,7 @@ namespace FindX
                             sameColor++;
                         }
                     }
-                    
+
                 }
 
                 if (canDown)
@@ -278,7 +287,7 @@ namespace FindX
                             sameColor++;
                         }
                     }
-                    
+
                 }
 
 
@@ -289,11 +298,11 @@ namespace FindX
             }
 
             float rate = sameColor / (float)sample;
-            
+
 
             if (rate > constRate)
             {
-                
+
                 return false;
             }
 
@@ -320,7 +329,7 @@ namespace FindX
                 }
                 x += xOffset;
                 y += yOffset;
-                 Wait(1);
+                Wait(1);
                 lenth--;
             }
         }
@@ -347,7 +356,7 @@ namespace FindX
                 }
                 //Wait(1);
                 var res = FindLineInADirectionAndReturnLenth(bitmap, x + xStep, y + yStep, xStep, yStep, color, checkingMap, result) + 1;
-                if (result != null&&result.GetPixel(x,y)!=Color.Red)
+                if (result != null && result.GetPixel(x, y) != Color.Red)
                 {
                     //result.SetPixel(x, y, color);
                 }
@@ -427,6 +436,32 @@ namespace FindX
         {
             logTextBox.Text += msg + Environment.NewLine;
             //logTextBox.Refresh();
+        }
+
+        private void Color1Button_Click(object sender, EventArgs e)
+        {
+            if (colorPicker.ShowDialog() == DialogResult.OK)
+            {
+                Color1Button.BackColor = colorPicker.Color;
+            }
+        }
+
+        private void Color2Button_Click(object sender, EventArgs e)
+        {
+            if (colorPicker.ShowDialog() == DialogResult.OK)
+            {
+                Color2Button.BackColor = colorPicker.Color;
+            }
+        }
+
+        private void CalculateButton_Click(object sender, EventArgs e)
+        {
+            Log(GetTheColourMetric(Color1Button.BackColor, Color2Button.BackColor).ToString());
+        }
+
+        private void ClearLog_Click(object sender, EventArgs e)
+        {
+            logTextBox.Text = "";
         }
     }
 }
